@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class VehicleInventory {
@@ -78,8 +79,14 @@ public class VehicleInventory {
                 case "1":
                     listAllVehicles(vehicles);
                     break;
+                case "2":
+                    findVehicleByMakeModel(vehicles);
+                    break;
                 case "3":
                     findVehicleByPrice(vehicles);
+                    break;
+                case "4":
+                    findVehicleByColor(vehicles);
                     break;
                 case "5":
                     addAVehicle(vehicles);
@@ -106,6 +113,29 @@ public class VehicleInventory {
         System.out.println();
     }
 
+    public static void findVehicleByMakeModel(Vehicle[] vehicles) {
+        Scanner input = new Scanner(System.in);
+        String makeModel;
+        System.out.print("Enter make/model: ");
+        makeModel = input.nextLine();
+
+        for (int i = 0; i < vehicles.length; i++) {
+            if (vehicles[i] != null) {
+                if (Objects.equals(vehicles[i].getMakeModel(), makeModel)) {
+                    System.out.printf("%d, %s, %s, %d, %.0f%n",
+                            vehicles[i].getVehicleId(),
+                            vehicles[i].getMakeModel(),
+                            vehicles[i].getColor(),
+                            vehicles[i].getOdometerReading(),
+                            vehicles[i].getPrice()
+                    );
+                }
+            }
+        }
+
+        System.out.println();
+    }
+
     public static void findVehicleByPrice(Vehicle[] vehicles) {
         Scanner input = new Scanner(System.in);
         int minPriceRange;
@@ -118,6 +148,29 @@ public class VehicleInventory {
         for (int i = 0; i < vehicles.length; i++) {
             if (vehicles[i] != null) {
                 if (vehicles[i].getPrice() > minPriceRange && vehicles[i].getPrice() < maxPriceRange) {
+                    System.out.printf("%d, %s, %s, %d, %.0f%n",
+                            vehicles[i].getVehicleId(),
+                            vehicles[i].getMakeModel(),
+                            vehicles[i].getColor(),
+                            vehicles[i].getOdometerReading(),
+                            vehicles[i].getPrice()
+                    );
+                }
+            }
+        }
+
+        System.out.println();
+    }
+
+    public static void findVehicleByColor(Vehicle[] vehicles) {
+        Scanner input = new Scanner(System.in);
+        String color;
+        System.out.print("Enter color: ");
+        color = input.nextLine();
+
+        for (int i = 0; i < vehicles.length; i++) {
+            if (vehicles[i] != null) {
+                if (Objects.equals(vehicles[i].getColor(), color)) {
                     System.out.printf("%d, %s, %s, %d, %.0f%n",
                             vehicles[i].getVehicleId(),
                             vehicles[i].getMakeModel(),
